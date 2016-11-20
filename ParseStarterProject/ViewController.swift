@@ -82,6 +82,7 @@ class ViewController: UIViewController {
                         self.createAlert(title: "Error in form", message: displayErrorMessage)
                     } else {
                         print("user sign up")
+                        self.performSegue(withIdentifier: "showUserTable", sender: self)
                     }
                 })
             } else {
@@ -98,10 +99,20 @@ class ViewController: UIViewController {
 
                     } else {
                         print("Log In")
+                        self.performSegue(withIdentifier: "showUserTable", sender: self)
+
                     }
                 })
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if PFUser.current()?.objectId != nil {
+            performSegue(withIdentifier: "showUserTable", sender: self)
+        }
+        
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     

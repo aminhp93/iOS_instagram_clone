@@ -80,11 +80,66 @@
                         <outlet property="messageLabel" destination="OAD-Yv-CUd" id="a95-gc-Ow8"/>
                         <outlet property="passwordTextField" destination="G08-Rg-zmr" id="Bh0-1C-407"/>
                         <outlet property="signUpButton" destination="HG9-CF-Uzb" id="cyn-HQ-yre"/>
+                        <segue destination="WpG-eO-dmq" kind="show" identifier="showUserTable" id="5iQ-eL-BhH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="136.28185907046478"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="rgJ-qQ-JKM">
+            <objects>
+                <tableViewController id="gFe-7b-kCD" customClass="UserTableViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="40z-va-BkB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="PGx-dl-jWp">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PGx-dl-jWp" id="SlK-Mk-caQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="gFe-7b-kCD" id="nFh-7T-eME"/>
+                            <outlet property="delegate" destination="gFe-7b-kCD" id="uTE-Un-hA1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="T9E-gL-5Qt">
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="qjn-c3-jMy">
+                            <connections>
+                                <action selector="logoutButton:" destination="gFe-7b-kCD" id="cil-za-6AL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="logoutSegue" id="8lW-bN-e1I"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dA8-jl-Gls" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1889" y="180"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SgO-dB-HdD">
+            <objects>
+                <navigationController id="WpG-eO-dmq" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Wpn-6e-sCu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="gFe-7b-kCD" kind="relationship" relationship="rootViewController" id="9Q7-Py-VFV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SYk-vR-fvh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="938" y="144"/>
         </scene>
     </scenes>
 </document>
