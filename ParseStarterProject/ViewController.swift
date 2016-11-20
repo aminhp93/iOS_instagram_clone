@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     
     var signupMode = true
     
+    var activityIndicator = UIActivityIndicatorView()
     
     @IBOutlet weak var emailTextField: UITextField!
     
@@ -52,6 +53,16 @@ class ViewController: UIViewController {
         if emailTextField.text == "" || passwordTextField.text == "" {
             createAlert(title: "Error in form", message: "Please enter an email and password")
         } else {
+            
+            activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            activityIndicator.startAnimating()
+            view.addSubview(activityIndicator)
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
+            
             if signupMode {
                 // Sign Up
                 
@@ -60,19 +71,37 @@ class ViewController: UIViewController {
                 user.email = emailTextField.text
                 user.password = passwordTextField.text
                 user.signUpInBackground(block: { (success, error) in
+                    
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
                     if error != nil {
-                        self.createAlert(title: "Error in form", message: "Parse Error")
+                        print(error)
+                        
+                        var displayErrorMessage = "Please try again later"
+                        
+                        self.createAlert(title: "Error in form", message: displayErrorMessage)
                     } else {
                         print("user sign up")
                     }
                 })
+            } else {
+                // Log In
+                
+                PFUser.logInWithUsername(inBackground: emailTextField.text!, password: passwordTextField.text!, block: { (user, error) in
+                    self.activityIndicator.stopAnimating()
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    
+                    if error != nil{
+                        var displayErrorMessage = "Please try again later"
+                        
+                        self.createAlert(title: "Error in form", message: displayErrorMessage)
+
+                    } else {
+                        print("Log In")
+                    }
+                })
             }
-            
-            
-            
         }
-        
-        
     }
     
     
