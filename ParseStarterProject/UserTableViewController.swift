@@ -148,7 +148,7 @@ class UserTableViewController: UITableViewController {
             
             query.findObjectsInBackground(block: { (objects, error) in
                 if let objects = objects {
-                    print(objects, "line 126")
+                    print(objects, "line 126") 
                     for i in objects {
                         i.deleteInBackground()
                     }
